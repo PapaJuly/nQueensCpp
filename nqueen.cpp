@@ -3,7 +3,6 @@
 using namespace std;
 
 const int N = 4;
-
 void print(int print[][N] , int size)
 {    
     for (int i = 0; i < size; i++)
@@ -45,38 +44,19 @@ bool checkSpot (int board [][N], int row, int col ){
 void placeQueen(int board [][N],int x, int y){
     board[x][y]=1;
 }
-void removeQueen(int board [][N], int row, int col){
-    board[row][col]=0;
-}
-int fillRow(int board [][N], const int row, const int col){
-        for (int i = col; i<N; i++){
-            if (checkSpot(board, row, i)){
-                placeQueen(board, row, i);
-                return i;
+void fillBoard(int board [][N], int row, int col){
+    for (int y = row; y<N ; y++){
+        for (int x = col; x<N ; x++){
+            if(checkSpot(board, y, x)){
+                placeQueen(board,y,x);
+                break;
+            }
+            else if (x== N -1){
+
             }
         }
-        return 108;
 }
-void fillAllRows (int board[][N]){
-    int i = 0;
-    int aux = 108;
-    int temper = 0;
-    stack <int> result;
-    while (i<N){
-        result.push(fillRow(board,i,temper));
-        if (result.top()==108){
-            result.pop();
-            temper =result.top();
-            result.pop();
-            i-=1;
-        }
-        else{
-            temper = 0;
-            i++;
-        }
-    }
-    }
-
+}
 int main(){
          
     int board [N][N] = {0};
@@ -85,9 +65,8 @@ int main(){
     print(board, N);
     cout << checkSpot(board, 1, 1);
     */
-    fillBoard(board,0,0);
+    fillBoard(board, 0, 0);
     print(board, N);
-
     return 0;
 }
 
