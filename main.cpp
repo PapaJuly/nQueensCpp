@@ -49,6 +49,8 @@ void removeQueen(int board [][N], int row, int col){
     board[row][col]=0;
 }
 int fillRow(int board [][N], const int row, const int col){
+        if (row >= N || col >= N )
+        return 108;
         for (int i = col; i<N; i++){
             if (checkSpot(board, row, i)){
                 placeQueen(board, row, i);
@@ -58,24 +60,53 @@ int fillRow(int board [][N], const int row, const int col){
         return 108;
 }
 void fillAllRows (int board[][N]){
+
+    stack <int> queens;
+    
+    while (queens.size() < N){
+        if (queens.empty()){
+            queens.push(fillRow(board, 0, 0));
+        }
+        else if(queens.top()==108){
+            queens.pop();
+            if ( queens.top() < N -1){
+            int aux = queens.top();
+            int sizeAux = queens.size() - 1;
+            board[queens.size()][aux] = 0;
+            queens.pop();
+            queens.push(fillRow(board, aux +1, sizeAux));
+            }
+        }
+        else {
+            queens.push(fillRow(board, queens.size(), 0));
+        }
+    }
+
+    print(board, N);
+}
+/*void fillBoard(int board [][N], int row, int col){
     int i = 0;
     int aux = 108;
     int temper = 0;
     stack <int> result;
     while (i<N){
         result.push(fillRow(board,i,temper));
-        if (result.top()==108){
+        print(board,N);
+        cout<< "\n";
+        if(result.top() > N){
             result.pop();
-            temper =result.top();
-            result.pop();
-            i-=1;
+            i = i - 1;
+            board[i][result.top()] = 0;
+            temper = result.top()+1;
+            result.pop(); 
         }
         else{
-            temper = 0;
-            i++;
+        cout<< "\n" << result.top() << " \n" ;
+        i++;
         }
     }
     }
+    */
 
 int main(){
          
@@ -85,7 +116,7 @@ int main(){
     print(board, N);
     cout << checkSpot(board, 1, 1);
     */
-    fillBoard(board,0,0);
+    fillAllRows(board);
     print(board, N);
 
     return 0;
