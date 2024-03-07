@@ -3,12 +3,16 @@
 using namespace std;
 
 const int N = 4;
-struct chessBoard {
+struct chessBoard
+{
     int board[N][N] = {0};
-    chessBoard(int arr [][N], int size){
-        for (int i = 0; i<size;i++){
-            for(int j = 0; j<size; j++){
-                board[i][j]= arr[i][j];
+    chessBoard(int arr[][N], int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                board[i][j] = arr[i][j];
             }
         }
     }
@@ -104,18 +108,25 @@ void fillAllRows(int board[][N])
     print(board, N);
     cout << endl;
 }
-bool fillBoardRecursively(int board[][N], int row){
+bool fillBoardRecursively(int board[][N], int row)
+{
     chessBoard aux = chessBoard(board, N);
-    if (row >= N){
-        print(aux.board, N);
+    if (row >= N)
+    {
         return true;
     }
     for (int i = 0; i < N; i++)
     {
-      if(checkSpot(aux.board, row, i)){
-        aux.board[row][i] = 1;
-       return fillBoardRecursively(aux.board, row+1);
-      }
+        if (checkSpot(aux.board, row, i))
+        {
+            aux.board[row][i] = 1;
+            if (fillBoardRecursively(aux.board, row + 1))
+            {
+                print(aux.board, N);
+                cout << endl;
+            }
+            aux.board[row][i] = 0;
+        }
     }
     return false;
 }
@@ -129,7 +140,7 @@ int main()
      print(board, N);
      cout << checkSpot(board, 1, 1);
      */
-    //fillAllRows(board);
+    // fillAllRows(board);
     fillBoardRecursively(board, 0);
     // fillBoard(board);
     // fillBoard(board, 0);
