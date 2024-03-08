@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-const int N = 5;
+const int N = 4;
 int counter = 0;
 ofstream opFile;
   
@@ -129,7 +129,7 @@ bool fillBoardRecursively(int board[][N], int row)
             if (fillBoardRecursively(aux.board, row + 1))
             {
                 print (aux.board, N);
-                cout << endl;
+               // cout << endl;
             }
             aux.board[row][i] = 0;
         }
