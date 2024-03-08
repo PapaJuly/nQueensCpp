@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-const int N = 4;
+const int N = 5;
 int counter = 0;
 ofstream opFile;
   
@@ -33,20 +33,33 @@ void print(int print[][N], int size)
     }
     opFile<<endl;
 }
+void printOnTerminal(int print[][N],int size){
+    
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cout << print[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout<<endl;
+}
+
 bool checkSpot(int board[][N], int row, int col)
 {
     if (row >= N || col >= N)
     {
         return false;
     }
-    for (int i = row, j = col; i >= 0, j < N; j++, i--)
+    for (int i = row, j = col; i >= 0 && j < N; j++, i--)
     {
         if (board[i][j] == 1)
         {
             return false;
         }
     }
-    for (int i = row, j = col; i >= 0, j >= 0; j--, i--)
+    for (int i = row, j = col; i >= 0 && j >= 0; j--, i--)
     {
         if (board[i][j] == 1)
         {
@@ -146,6 +159,9 @@ int main()
 
     opFile <<"The total solutions found: " << counter;
     opFile.close();
+
+    fillAllRows(board);
+    printOnTerminal(board,N);
    
     return 0;
 }
