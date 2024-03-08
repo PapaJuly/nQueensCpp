@@ -1,8 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <stack>
 using namespace std;
 
-const int N = 4;
+const int N = 5;
+int counter = 0;
+ofstream opFile;
+  
 struct chessBoard
 {
     int board[N][N] = {0};
@@ -23,10 +27,11 @@ void print(int print[][N], int size)
     {
         for (int j = 0; j < N; j++)
         {
-            cout << print[i][j] << " ";
+            opFile << print[i][j] << " ";
         }
-        cout << endl;
+        opFile << endl;
     }
+    opFile<<endl;
 }
 bool checkSpot(int board[][N], int row, int col)
 {
@@ -113,6 +118,7 @@ bool fillBoardRecursively(int board[][N], int row)
     chessBoard aux = chessBoard(board, N);
     if (row >= N)
     {
+        counter += 1;
         return true;
     }
     for (int i = 0; i < N; i++)
@@ -122,7 +128,7 @@ bool fillBoardRecursively(int board[][N], int row)
             aux.board[row][i] = 1;
             if (fillBoardRecursively(aux.board, row + 1))
             {
-                print(aux.board, N);
+                print (aux.board, N);
                 cout << endl;
             }
             aux.board[row][i] = 0;
@@ -135,15 +141,11 @@ int main()
 {
 
     int board[N][N] = {0};
-    /*
-     board [0][0] = 1;
-     print(board, N);
-     cout << checkSpot(board, 1, 1);
-     */
-    // fillAllRows(board);
+    opFile.open("opFile.txt");
     fillBoardRecursively(board, 0);
-    // fillBoard(board);
-    // fillBoard(board, 0);
 
+    opFile <<"The total solutions found: " << counter;
+    opFile.close();
+   
     return 0;
 }
