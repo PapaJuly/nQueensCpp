@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-const int N = 5;
+const int N = 3;
 int counter = 0;
 ofstream opFile;
   
@@ -160,8 +160,8 @@ int main()
     opFile <<"The total solutions found: " << counter;
     opFile.close();
 
-    fillAllRows(board);
-    printOnTerminal(board,N);
+    //fillAllRows(board);
+    //printOnTerminal(board,N);
    
     return 0;
 }
