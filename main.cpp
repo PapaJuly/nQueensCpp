@@ -45,7 +45,6 @@ void printOnTerminal(int print[][N],int size){
     }
     cout<<endl;
 }
-
 bool checkSpot(int board[][N], int row, int col)
 {
     if (row >= N || col >= N)
@@ -75,56 +74,13 @@ bool checkSpot(int board[][N], int row, int col)
     }
     return true;
 }
-void placeQueen(int board[][N], int x, int y)
+inline void placeQueen(int board[][N], int x, int y)
 {
     board[x][y] = 1;
 }
-void removeQueen(int board[][N], int row, int col)
+inline void removeQueen(int board[][N], int row, int col)
 {
     board[row][col] = 0;
-}
-int fillRow(int board[][N], const int row, const int col)
-{
-    if (row >= N || col >= N)
-        return 108;
-    for (int i = col; i < N; i++)
-    {
-        if (checkSpot(board, row, i))
-        {
-            placeQueen(board, row, i);
-            return i;
-        }
-    }
-    return 108;
-}
-void fillAllRows(int board[][N])
-{
-    int i = 0;
-    int aux = 108;
-    int temper = 0;
-    stack<int> result;
-
-    while (i < N && i >= 0)
-    {
-        aux = fillRow(board, i, temper);
-        temper = 0;
-
-        if (aux != 108)
-        {
-            result.push(aux);
-            i += 1;
-        }
-        else
-        {
-            i -= 1;
-            temper = result.top();
-            board[i][temper] = 0;
-            temper = temper + 1;
-            result.pop();
-        }
-    }
-    print(board, N);
-    cout << endl;
 }
 bool fillBoardRecursively(int board[][N], int row)
 {
@@ -149,7 +105,6 @@ bool fillBoardRecursively(int board[][N], int row)
     }
     return false;
 }
-
 int main()
 {
 
