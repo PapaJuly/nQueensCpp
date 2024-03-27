@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-const int N = 3;
+const int N = 5;
 int counter = 0;
 ofstream opFile;
   
