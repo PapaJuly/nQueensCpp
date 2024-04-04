@@ -3,22 +3,30 @@
 #include <stack>
 using namespace std;
 
-const int N = 5;
+const int N = 6;
 int counter = 0;
 ofstream opFile;
   
 struct chessBoard
 {
-    int board[N][N] = {0};
+    int board[N][N];
+    void start(){
+        for (int i = 0; i < N; i++){
+                for (int j = 0; j < N; j++){
+                        board[i][j] = 0;
+}
+}
+}
     chessBoard(int arr[][N], int size)
     {
+     	start();
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
-                board[i][j] = arr[i][j];
+             	board[i][j] = arr[i][j];
             }
-        }
+	}
     }
 };
 void print(int print[][N], int size)
