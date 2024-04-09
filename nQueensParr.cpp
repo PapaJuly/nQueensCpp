@@ -361,7 +361,7 @@ void NQueens(int n, i64* unique, i64* total)
     // y=0: 000000001 (static)
     // y=1: 011111100 (select)
     #pragma omp parallel for
-    for (x1 = 2; x1 < (n - 1); x1++) {
+    for (x1 = 2; x1 < (n-1); x1++) {
         Corner(n, x1, &unq[x1], &ttl[x1]);
     }
 
